@@ -1,0 +1,169 @@
+package com.demo.entity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Zadeshwar_Details")
+public class Member {
+
+	
+
+	@Id
+	private int id;
+    
+     @Column(name="FirstName")
+	 private String FirstName;
+     
+     @Column(name="MiddleName")
+	 private String MiddleName;
+     
+     @Column(name="LastName")
+	 private String LastName;
+	 
+     @Column(name="SpouseName")
+	 private String SpouseName;
+	 
+     @Column(name="ParentsName")
+	 private String ParentsName;
+     
+     @Column(name="StreetName")
+	 private String StreetName;
+	 
+     @Column(name="City")
+	 private String City;
+     
+     @Column(name="State")
+	 private String State;
+     
+     
+     @Column(name="ZipCode")
+	 private String ZipCode;
+     
+     @Column(name="Email")
+	 private String Email;
+     
+     @Column(name="PhoneNumber")
+	 private String PhoneNumber;
+     
+     @Column(name="Homenumber")
+	 private String Homenumber;
+     
+     @Column(name="ZadeshwarAddress")
+	 private String ZadeshwarAddress;
+
+	public String getFirstName() {
+		return FirstName;
+	}
+
+	public void setFirstName(String firstName) {
+		FirstName = firstName;
+	}
+
+	public String getMiddleName() {
+		return MiddleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		MiddleName = middleName;
+	}
+
+	public String getLastName() {
+		return LastName;
+	}
+
+	public void setLastName(String lastName) {
+		LastName = lastName;
+	}
+
+	public String getSpouseName() {
+		return SpouseName;
+	}
+
+	public void setSpouseName(String spouseName) {
+		SpouseName = spouseName;
+	}
+
+	public String getParentsName() {
+		return ParentsName;
+	}
+
+	public void setParentsName(String parentsName) {
+		ParentsName = parentsName;
+	}
+
+	public String getStreetName() {
+		return StreetName;
+	}
+
+	public void setStreetName(String streetName) {
+		StreetName = streetName;
+	}
+
+	public String getCity() {
+		return City;
+	}
+
+	public void setCity(String city) {
+		City = city;
+	}
+
+	public String getState() {
+		return State;
+	}
+
+	public void setState(String state) {
+		State = state;
+	}
+
+	public String getZipCode() {
+		return ZipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		ZipCode = zipCode;
+	}
+
+	public String getEmail() {
+		return Email;
+	}
+
+	public void setEmail(String email) {
+		Email = email;
+	}
+
+	public String getPhoneNumber() {
+		return PhoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		PhoneNumber = phoneNumber;
+	}
+
+	public String getHomenumber() {
+		return Homenumber;
+	}
+
+	public void setHomenumber(String homenumber) {
+		Homenumber = homenumber;
+	}
+
+	public String getZadeshwarAddress() {
+		return ZadeshwarAddress;
+	}
+
+	public void setZadeshwarAddress(String zadeshwarAddress) {
+		ZadeshwarAddress = zadeshwarAddress;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
+}
