@@ -1,14 +1,36 @@
 package com.demo.entity;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@SuppressWarnings("serial")
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name="Zadeshwar_Details")
-public class Member {
+public class Member implements Serializable {
 
 	
+
+	
+	
+	/**
+	 * 
+	 */
+	public Member() {
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Member [id=%s, FirstName=%s, MiddleName=%s, LastName=%s, SpouseName=%s, ParentsName=%s, StreetName=%s, City=%s, State=%s, ZipCode=%s, Email=%s, PhoneNumber=%s, Homenumber=%s, ZadeshwarAddress=%s]",
+				id, FirstName, MiddleName, LastName, SpouseName, ParentsName, StreetName, City, State, ZipCode, Email,
+				PhoneNumber, Homenumber, ZadeshwarAddress);
+	}
 
 	@Id
 	private int id;
