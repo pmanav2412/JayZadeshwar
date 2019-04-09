@@ -4,6 +4,7 @@
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -24,16 +25,17 @@
  			<div class="row">
  				<div class="col-8">
  				
- 				<form:form cssClass="form-horizontal" role="form" id="membForm">
+ 				<form:form cssClass="form-horizontal" role="form" id="membForm" action="Member" method="POST">
  					<div class="form-group row">
  						
  						<label for="email" class="col-2 col-form-label">E-mail ID:</label>
  						<div class="col-8">
- 							<input type="text" class="form-control" placeholder="Enter Email ID" name="email" id="email">
+ 							<input type="text" class="form-control" placeholder="Enter Email ID" name="Email" id="email">
  						</div>
  						
  						<div class="col-2">
  							<button type="submit" id="btn-search" class="btn btn-primary">Search</button>
+ 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
  						
  						</div>
  					</div>
@@ -51,12 +53,12 @@
  		    			</div>
  		    			
  		    			<div class="card-body">
- 		    				<div id=""></div>
- 		    				<div id=""></div>
- 		    				<div id=""></div>
- 		    				<div id=""></div>
- 		    				<div id=""></div>
- 		    				<div id=""></div>
+ 		    				<div id="FirstName"></div>
+ 		    				<div id="LastName"></div>
+ 		    				<div id="MiddleName"></div>
+ 		    				<div id="q"></div>
+ 		    				<div id="w"></div>
+ 		    				<div id="e"></div>
  		    			</div>
  		    			
  		    		</div>
@@ -72,15 +74,60 @@
  		
  		</div>
  		
- 		<script>
+ 		<!-- <script>
  			$(document).ready(function($){
  				$('#divResults').hide();
  				$('#divError').hide();
+ 				$('#membForm').submit(function(event){
+ 					enableSearchButton(false);
+ 					event.preventDefault();
+ 					searchViaAjax();
+ 				})
  			});
+ 			
  			function enableSearchButton(flag){
  				$("#btn-search").prop("disabled",flag);
  			}
+ 			
+ 			function searchViaAjax(){
+ 				var memb ={}
+ 				memb["Email"]=$("#email").val();
+ 				$.ajax({
+ 					type : "POST",
+ 					contentType : "application/json",
+ 					uri : "http://localhost:8080/JayZadeshwar/Member",
+ 					data : JSON.stringify(memb),
+ 					dataType : 'json',
+ 					timeout : 100000,
+ 					success : function(data)
+ 							{
+ 								display(data);
+ 							},
+ 					error : function(e){
+ 								$('#divResults').hide();
+ 								$('#divError').show();
+ 							},
+ 					done : function(e){
+ 								enableSearchButton(true);
+ 							}
+ 					
+ 			});
+ 			}
+ 			
+ 			function display(data){
+ 				$('#FirstName').html("something: " + data["FirstName"]);
+ 				$('#LastName').html("something: " + data["FirstName"]);
+ 				$('#MiddleName').html("something: " + data["FirstName"]);
+ 				$('#q').html("something: " + data["FirstName"]);
+ 				$('#w').html("something: " + data["FirstName"]);
+ 				$('#e').html("something: " + data["FirstName"]);
+ 				$('#divError').hide();
+ 				$('#divResults').show();
+ 				
+ 			}
  		</script>
- 		
+ 		 -->
+		
+
 </body>
 </html>

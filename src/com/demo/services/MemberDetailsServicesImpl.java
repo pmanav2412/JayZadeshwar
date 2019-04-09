@@ -23,4 +23,12 @@ public class MemberDetailsServicesImpl implements MemberDetailsServices {
 		return memberList;
 	}
 
+
+	@Override
+	@Transactional
+	public List<Member> findByEmail(String email) {
+		List<Member> member = memberDetailsDAO.findByEmail(email);
+		return member;
+	}
+
 }

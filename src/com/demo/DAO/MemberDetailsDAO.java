@@ -8,4 +8,7 @@ public interface MemberDetailsDAO {
 
 	
 	public List<Member> getallMember();
+
+	public List<Member> findByEmail(String email);
+	
 }

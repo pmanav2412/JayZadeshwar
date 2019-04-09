@@ -2,14 +2,19 @@ package com.demo.controllers;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +35,7 @@ public class AppController {
 	
 	@RequestMapping("/")
 	public String getIndexPage() {
+		
 		return "index";
 	}
 
@@ -41,21 +47,25 @@ public class AppController {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			String name = auth.getName(); // get logged in user name
 			model.addAttribute("username",name);
+			
+			///// one member
+			
 			return "ZadeshwarList";
 
-		
 	}
 	
 	
-	
-//	@GetMapping("/getJsonData")
-//	public @ResponseBody List<Member>  DisplayList() {
+//	@ResponseBody
+//	@GetMapping("Member/*")
+//	public List<Member> DisplayList1(Model model) {
 //
-//			List<Member> list = memberDetailsServices.getallMember();
-//			ObjectMapper mapper = new ObjectMapper();
-//			System.out.println(list.size()+ " kghjg "); 
-//			mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-//			return list;
+//		List<Member> list = memberDetailsServices.getallMember();
+//		ObjectMapper mapper = new ObjectMapper();
+//		System.out.println(list.size()+ " kghjg "); 
+//		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+//		return list;
+//
+//		
 //	}
 	
 	
@@ -65,7 +75,30 @@ public class AppController {
 		return "findMember";
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value="/Member",method=RequestMethod.POST,produces = "application/json")
+	public ResponseEntity<Member> findByEmail(@RequestParam(value="Email")String email) {
+		
+		
+		
+//		String email = "pmanav27@gmail.com";
+		List<Member> m = memberDetailsServices.findByEmail(email);
+//		for(Member memb:m)
+//		System.out.println(memb.getFirstName()+ "aaa to mari detal avi gai");
+		
+		Member memb = m.get(0);
+		
+//		String email = member.getEmail();
+//		List<Member> m = memberDetailsServices.findByEmail(email);
+//		Member memb = m.get(0);
+//		ObjectMapper mapper = new ObjectMapper();
+//		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+//		
+		if(memb == null)
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<Member>(memb,HttpStatus.OK);
+		
+	}
 	
 	
 	

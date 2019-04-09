@@ -26,14 +26,32 @@ public class MemberDetailsDAOImpl implements MemberDetailsDAO {
 		List<Member> memberList = new ArrayList<Member>();
 		try {
 		Query query = session.createQuery("From Member");
-		
 		memberList = query.list();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		
 		}
+
 		return memberList;
+	}
+
+
+	@Override
+	public List<Member> findByEmail(String email) {
+		Session session = sessionFactory.getCurrentSession();
+		List<Member> requestedMember = new ArrayList<Member>();
+		try {
+			Query query= session
+					.createQuery("FROM Member e WHERE e.Email=:Email");
+			query.setParameter("Email", email);
+			
+			requestedMember = query.list();
+		}catch(Exception e) {
+			e.getStackTrace();
+		}
+
+		return requestedMember;
 	}
 	
 	
