@@ -33,12 +33,41 @@ public class AppController {
 	@Autowired
 	MemberDetailsServices memberDetailsServices;
 	
+	
+	
+///////////
 	@RequestMapping("/")
 	public String getIndexPage() {
 		
 		return "index";
 	}
-
+	
+	
+///////////	
+	@RequestMapping("/LoginPage")
+	public String Login() {
+		
+		return "Login";
+	}
+	
+	
+///////////	
+	@RequestMapping("/Login")
+	public String Login(@RequestParam(value="error", required=false)String error,@RequestParam(value="logout", required=false)String logout,
+			Model model) {
+		System.out.println("Hello");
+		if(error != null) {
+			model.addAttribute("error", "Invalid Username And Password");
+		}
+		
+		if(logout != null) {
+			model.addAttribute("msg", "You Have been logged out successfully");
+		}
+		return "Login";
+	}
+	
+	
+///////////
 	@GetMapping("/getData")
 	public String DisplayList(Model model) {
 
@@ -69,60 +98,45 @@ public class AppController {
 //	}
 	
 	
+	
+///////////
 	@RequestMapping(value="/find", method=RequestMethod.GET)
 	public String findMember(Model model)
 	{
 		return "findMember";
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/Member",method=RequestMethod.POST,produces = "application/json")
-	public ResponseEntity<Member> findByEmail(@RequestParam(value="Email")String email) {
-		
-		
-		
-//		String email = "pmanav27@gmail.com";
+	
+///////////
+	
+	@RequestMapping(value="/getData/Member",method=RequestMethod.POST,produces = "application/json")
+	public String findByEmail(@RequestParam(value="Email")String email,Model model) {
 		List<Member> m = memberDetailsServices.findByEmail(email);
-//		for(Member memb:m)
-//		System.out.println(memb.getFirstName()+ "aaa to mari detal avi gai");
+		model.addAttribute("Members",m);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName(); // get logged in user name
+		model.addAttribute("username",name);
+		model.addAttribute("u","btn btn-success");
+		return "ZadeshwarList";
 		
-		Member memb = m.get(0);
 		
-//		String email = member.getEmail();
-//		List<Member> m = memberDetailsServices.findByEmail(email);
+		
+///     REST WEB SERVICES FOR PERTICULAR MEMBER (JSON)
+//		return type for methode
+		
 //		Member memb = m.get(0);
-//		ObjectMapper mapper = new ObjectMapper();
-//		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-//		
-		if(memb == null)
-			return new ResponseEntity(HttpStatus.NOT_FOUND);
-		return new ResponseEntity<Member>(memb,HttpStatus.OK);
-		
+//		if(memb == null)
+//			return new ResponseEntity(HttpStatus.NOT_FOUND);
+//			return new ResponseEntity<Member>(memb,HttpStatus.OK);
 	}
 	
 	
 	
-	@RequestMapping("/LoginPage")
-	public String Login() {
-		
-		return "Login";
-	}
 	
 	
 	
-	@RequestMapping("/Login")
-	public String Login(@RequestParam(value="error", required=false)String error,@RequestParam(value="logout", required=false)String logout,
-			Model model) {
-		System.out.println("Hello");
-		if(error != null) {
-			model.addAttribute("error", "Invalid Username And Password");
-		}
-		
-		if(logout != null) {
-			model.addAttribute("msg", "You Have been logged out successfully");
-		}
-		return "Login";
-	}
+	
+
 	
 	
 	

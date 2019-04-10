@@ -25,7 +25,7 @@
  			<div class="row">
  				<div class="col-8">
  				
- 				<form:form cssClass="form-horizontal" role="form" id="membForm" action="Member" method="POST">
+ 				<form:form cssClass="form-horizontal" role="form" id="membForm" action="getData/Member" method="POST">
  					<div class="form-group row">
  						
  						<label for="email" class="col-2 col-form-label">E-mail ID:</label>

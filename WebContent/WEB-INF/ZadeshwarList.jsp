@@ -9,9 +9,11 @@
 <title>Insert title here</title>
 </head>
 <body style="background: light;">
-<jsp:include page="Header.jsp" />
+<%-- <jsp:include page="Header.jsp" /> --%>
 
-<div class="row">
+	
+
+	<div class="row" style="margin: 10px auto;">
  	<div class="col-12">
  		<c:url value="/logout" var="logoutUrl"></c:url>
  		
@@ -28,39 +30,72 @@
  		</script>
  	
  		<p class="display-5">
- 		 welcome : ${username} , <a href="javascript:formSubmit()">
+ 		 <b>WelCome </b>: ${username} , <a href="javascript:formSubmit()" class="btn btn-danger">
  		 Logout </a>
  		 </p>
  	</div>
 </div>
+<c:url var="findMember" value="/getData/Member" />   <!--  URL for FORM FIND MEMBER-->
+<c:url var="allMember" value="/getData" />  <!--  URL for GET BACK TO ALL MEMBER-->		
+<form style="margin: 10px auto; padding-left: 22%"
+		action="${findMember}" method="POST">
+		
 
-<div style="margin: auto;width: 90% ; margin-top: 10px;">
-<table class="table table-striped " style="border: 2px solid green">
-  <thead class="thead-dark">
-    <tr>
-      
-      <th scope="col">Name</th>
-      <th scope="col">Parents(F/M)</th>
-      <th scope="col">PHONE NUMBER</th>
-       <th scope="col">EMAIL</th>
-      <th scope="col">ADDRESS(USA/IND)</th>
-    </tr>
-  </thead>
+		
+		<div class="form-row align-items-center">
+		    <div class="col-auto">
 
-  <tbody>
-    <c:forEach var="Member" items="${Members}">
-    <tr>
-      <td>${Member.getFirstName()} ${Member.getMiddleName()} Patel</td>
-      <td>${Member.getParentsName()}</td>
-      <td>${Member.getPhoneNumber()} / ${Member.getHomenumber()}</td>
-         <td>${Member.getEmail()}</td>
-      <td>${Member.getState()} / ${Member.getZadeshwarAddress()}</td>
-    </tr>
-      </c:forEach>
-  </tbody>
+				<h4>Find Member: </h4>
+			</div>
+			<div class="col-auto">
 
-</table>
-</div>
+				<input type="text" class="form-control" id="inputCity"
+					placeholder="Member's name" name="Email">
+			</div>
+			
+			<div class="col-auto" style="">
+				<input type="submit" value="Find" class="btn btn-primary form-control" />
+			</div>
+			<div class="col-auto" style="">
+				<a class="btn btn-success" href="${allMember} " role="button">All Members</a>
+			</div>
+		</div>
+	</form>
+
+
+<div >
+		<table class="table table-striped ">
+			<thead class="thead-dark">
+				<tr>
+
+					<th scope="col">Name</th>
+					<th scope="col">Parents(F/M)</th>
+					<th scope="col">PHONE NUMBER</th>
+					<th scope="col">EMAIL</th>
+					<th scope="col">ADDRESS(USA/IND)</th>
+					<th scope="col">Details</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<c:forEach var="Member" items="${Members}">
+					<c:url var="editLink" value="/find">
+						<%-- <c:param name="accountNo" value="${ Account.accNo}"></c:param> --%>
+					</c:url>
+					<tr>
+						<td>${Member.getFirstName()} ${Member.getMiddleName()} Patel</td>
+						<td>${Member.getParentsName()}</td>
+						<td>${Member.getPhoneNumber()}/ ${Member.getHomenumber()}</td>
+						<td>${Member.getEmail()}</td>
+						<td>${Member.getState()}/ ${Member.getZadeshwarAddress()}</td>
+						<td><a href="${editLink} " class="btn btn-success">View</a></td>
+
+					</tr>
+				</c:forEach>
+			</tbody>
+
+		</table>
+	</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

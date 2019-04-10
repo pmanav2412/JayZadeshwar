@@ -10,7 +10,7 @@
        http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/getData**"
+		<intercept-url pattern="/getData/*"
 			access="hasRole('ROLE_ADMIN')" />
 		<form-login 
 		    login-page="/Login" 
@@ -24,7 +24,7 @@
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="jayzadeshwar@gmail.com" password="JayZadeshwarNRZ"
+				<user name="jay" password="jay"
 					authorities="ROLE_ADMIN" />
 				<user name="pmanav27@gmail.com" password="Manavpatel@1"
 					authorities="ROLE_USER" />
