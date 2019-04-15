@@ -73,7 +73,16 @@
  		    </div>
  		
  		</div>
+ 		<script>
+ 		var http = new XMLHttpRequest();
+ 		http.open("GET","http://localhost:8080/JayZadeshwar/Members");
+ 		http.send();
  		
+ 		http.onreadystatechange = function(){
+ 		   console.log(http.responseText);
+ 		}
+ 		
+ 		</script>
  		<!-- <script>
  			$(document).ready(function($){
  				$('#divResults').hide();

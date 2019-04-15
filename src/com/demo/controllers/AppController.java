@@ -84,18 +84,18 @@ public class AppController {
 	}
 	
 	
-//	@ResponseBody
-//	@GetMapping("Member/*")
-//	public List<Member> DisplayList1(Model model) {
-//
-//		List<Member> list = memberDetailsServices.getallMember();
-//		ObjectMapper mapper = new ObjectMapper();
-//		System.out.println(list.size()+ " kghjg "); 
-//		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-//		return list;
-//
-//		
-//	}
+	@ResponseBody
+	@GetMapping("/Members")
+	public List<Member> DisplayList1(Model model) {
+
+		List<Member> list = memberDetailsServices.getallMember();
+		ObjectMapper mapper = new ObjectMapper();
+		System.out.println(list.size()+ " kghjg "); 
+		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+		return list;
+
+		
+	}
 	
 	
 	
