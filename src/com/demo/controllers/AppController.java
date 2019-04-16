@@ -55,7 +55,7 @@ public class AppController {
 	@RequestMapping("/Login")
 	public String Login(@RequestParam(value="error", required=false)String error,@RequestParam(value="logout", required=false)String logout,
 			Model model) {
-		System.out.println("Hello");
+	
 		if(error != null) {
 			model.addAttribute("error", "Invalid Username And Password");
 		}
@@ -68,7 +68,7 @@ public class AppController {
 	
 	
 ///////////
-	@GetMapping("/getData")
+	@GetMapping("/getData/Members")
 	public String DisplayList(Model model) {
 
 			List<Member> list = memberDetailsServices.getallMember();
@@ -85,12 +85,11 @@ public class AppController {
 	
 	
 	@ResponseBody
-	@GetMapping("/Members")
+	@GetMapping("getData/allMembers")
 	public List<Member> DisplayList1(Model model) {
 
 		List<Member> list = memberDetailsServices.getallMember();
 		ObjectMapper mapper = new ObjectMapper();
-		System.out.println(list.size()+ " kghjg "); 
 		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 		return list;
 
@@ -100,9 +99,11 @@ public class AppController {
 	
 	
 ///////////
-	@RequestMapping(value="/find", method=RequestMethod.GET)
-	public String findMember(Model model)
+	@RequestMapping(value="/find/{member}", method=RequestMethod.GET)
+	public String findMember(Model model,@PathVariable("member")String a)
 	{
+		List<Member> m = memberDetailsServices.findByEmail(a+".com");
+		model.addAttribute("Member",m.get(0));
 		return "findMember";
 	}
 	
@@ -116,7 +117,6 @@ public class AppController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName(); // get logged in user name
 		model.addAttribute("username",name);
-		model.addAttribute("u","btn btn-success");
 		return "ZadeshwarList";
 		
 		

@@ -37,7 +37,7 @@
 </div>
 <c:url var="findMember" value="/getData/Member" />   <!--  URL for FORM FIND MEMBER-->
 <c:url var="allMember" value="/getData" />  <!--  URL for GET BACK TO ALL MEMBER-->		
-<form style="margin: 10px auto; padding-left: 22%"
+<%-- <form style="margin: 10px auto; padding-left: 22%"
 		action="${findMember}" method="POST">
 		
 
@@ -50,7 +50,7 @@
 			<div class="col-auto">
 
 				<input type="text" class="form-control" id="inputCity"
-					placeholder="Member's name" name="Email">
+					placeholder="Member's email" name="Email">
 			</div>
 			
 			<div class="col-auto" style="">
@@ -60,7 +60,7 @@
 				<a class="btn btn-success" href="${allMember} " role="button">All Members</a>
 			</div>
 		</div>
-	</form>
+	</form> --%>
 
 
 <div >
@@ -79,15 +79,15 @@
 
 			<tbody>
 				<c:forEach var="Member" items="${Members}">
-					<c:url var="editLink" value="/find">
+					<c:url var="editLink" value="/find/${Member.getEmail()} ">
 						<%-- <c:param name="accountNo" value="${ Account.accNo}"></c:param> --%>
 					</c:url>
 					<tr>
-						<td>${Member.getFirstName()} ${Member.getMiddleName()} Patel</td>
+						<td>${Member.getFirstName()} ${Member.getMiddleName()} ${Member.getLastName()}</td>
 						<td>${Member.getParentsName()}</td>
 						<td>${Member.getPhoneNumber()}/ ${Member.getHomenumber()}</td>
 						<td>${Member.getEmail()}</td>
-						<td>${Member.getState()}/ ${Member.getZadeshwarAddress()}</td>
+						<td>${Member.getState()} / ${Member.getZadeshwarAddress()}</td>
 						<td><a href="${editLink} " class="btn btn-success">View</a></td>
 
 					</tr>

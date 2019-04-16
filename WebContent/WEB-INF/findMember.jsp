@@ -11,21 +11,22 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="Header.jsp" %>
 
- 		<div class="container">
- 			<%@ include file="Header.jsp" %>
+ 		<div class="container" style="margin-top:15px;">
  			
- 			<div class="row">
+ 			
+ 			<!-- <div class="row">
  				<div class="col-12">
  					<p class="h1"> Search Member</p>
  				</div>
- 			</div>
+ 			</div> -->
  			
  		
- 			<div class="row">
+ 			<%-- div class="row">
  				<div class="col-8">
- 				
- 				<form:form cssClass="form-horizontal" role="form" id="membForm" action="getData/Member" method="POST">
+ 				<c:url var="findMember" value="/getData/Member" /> 
+ 				<form:form cssClass="form-horizontal" role="form" id="membForm" action="${findMember} " method="POST">
  					<div class="form-group row">
  						
  						<label for="email" class="col-2 col-form-label">E-mail ID:</label>
@@ -42,7 +43,7 @@
  				</form:form>
  				
  				</div>
- 			</div>
+ 			</div> --%>
  			
  		    <div class="row" id="divResults">
  		    	<div class="col-8">
@@ -53,24 +54,26 @@
  		    			</div>
  		    			
  		    			<div class="card-body">
- 		    				<div id="FirstName"></div>
- 		    				<div id="LastName"></div>
- 		    				<div id="MiddleName"></div>
- 		    				<div id="q"></div>
- 		    				<div id="w"></div>
- 		    				<div id="e"></div>
+ 		    				<div ><b>Name :</b> ${Member.getFirstName()} ${Member.getMiddleName()} ${Member.getLastName()} </div>
+ 		    				<div ><b>Spouse name : </b>  ${Member. getSpouseName()}</div>
+ 		    				<div ><b>Parents name : </b> ${Member.getParentsName()}</div>
+ 		    				<div ><b>Address : </b>  ${Member.getStreetName()} ${Member.getCity()} ${Member.getState()}</div>
+ 		    				<div ><b>Email : </b>  ${Member.getEmail()}</div>
+ 		    				<div ><b>Phone Number : </b> ${Member.getPhoneNumber()}/ ${Member.getHomenumber()}   </div>
+ 		    				<div ><b>Zadeshwar Address : </b> ${Member.getZadeshwarAddress()}</div>
  		    			</div>
  		    			
  		    		</div>
  		    	</div>
  		    
  		    </div>
+ 		    <a href="" class="btn btn-warning" style="margin-top:20px;"> Back </a>
  		    
- 		    <div class="row" id="divError">
+ 		    <!-- <div class="row" id="divError">
  		    	<div class="col-8">
  		    		<p class="alert alert-danger">Requested Member's Details Not Found!</p>
  		    	</div>
- 		    </div>
+ 		    </div> -->
  		
  		</div>
  		<script>
