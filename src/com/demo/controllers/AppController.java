@@ -25,65 +25,86 @@ import com.demo.services.MemberDetailsServices;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-
-
 @Controller
 public class AppController {
-	
+
 	@Autowired
 	MemberDetailsServices memberDetailsServices;
-	
-	
-	
+
 ///////////
 	@RequestMapping("/")
 	public String getIndexPage() {
-		
+
 		return "index";
 	}
-	
-	
+
 ///////////	
 	@RequestMapping("/LoginPage")
 	public String Login() {
-		
+
 		return "Login";
 	}
-	
-	
+
 ///////////	
 	@RequestMapping("/Login")
-	public String Login(@RequestParam(value="error", required=false)String error,@RequestParam(value="logout", required=false)String logout,
-			Model model) {
-	
-		if(error != null) {
+	public String Login(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout, Model model) {
+
+		if (error != null) {
 			model.addAttribute("error", "Invalid Username And Password");
 		}
-		
-		if(logout != null) {
+
+		if (logout != null) {
 			model.addAttribute("msg", "You Have been logged out successfully");
 		}
 		return "Login";
 	}
-	
-	
+
 ///////////
 	@GetMapping("/getData/Members")
 	public String DisplayList(Model model) {
 
-			List<Member> list = memberDetailsServices.getallMember();
-			model.addAttribute("Members",list);
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			String name = auth.getName(); // get logged in user name
-			model.addAttribute("username",name);
-			
-			///// one member
-			
-			return "ZadeshwarList";
+		List<Member> list = memberDetailsServices.getallMember();
+		model.addAttribute("Members", list);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName(); // get logged in user name
+		model.addAttribute("username", name);
+
+		///// one member
+
+		return "ZadeshwarList";
 
 	}
+
 	
-	
+
+///////////
+	@RequestMapping(value = "/find/{member}", method = RequestMethod.GET)
+	public String findMember(Model model, @PathVariable("member") String a) {
+		List<Member> m = memberDetailsServices.findByEmail(a + ".com");
+		model.addAttribute("Member", m.get(0));
+		return "findMember";
+	}
+
+///////////
+
+	@RequestMapping(value = "/getData/Member", method = RequestMethod.POST, produces = "application/json")
+	public String findByEmail(@RequestParam(value = "Email") String email, Model model) {
+		List<Member> m = memberDetailsServices.findByEmail(email);
+		model.addAttribute("Members", m);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName(); // get logged in user name
+		model.addAttribute("username", name);
+		return "ZadeshwarList";
+
+///     REST WEB SERVICES FOR PERTICULAR MEMBER (JSON)
+//		return type for methode
+
+//		Member memb = m.get(0);
+//		if(memb == null)
+//			return new ResponseEntity(HttpStatus.NOT_FOUND);
+//			return new ResponseEntity<Member>(memb,HttpStatus.OK);
+	}
 	@ResponseBody
 	@GetMapping("getData/allMembers")
 	public List<Member> DisplayList1(Model model) {
@@ -93,51 +114,6 @@ public class AppController {
 		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 		return list;
 
-		
 	}
-	
-	
-	
-///////////
-	@RequestMapping(value="/find/{member}", method=RequestMethod.GET)
-	public String findMember(Model model,@PathVariable("member")String a)
-	{
-		List<Member> m = memberDetailsServices.findByEmail(a+".com");
-		model.addAttribute("Member",m.get(0));
-		return "findMember";
-	}
-	
-	
-///////////
-	
-	@RequestMapping(value="/getData/Member",method=RequestMethod.POST,produces = "application/json")
-	public String findByEmail(@RequestParam(value="Email")String email,Model model) {
-		List<Member> m = memberDetailsServices.findByEmail(email);
-		model.addAttribute("Members",m);
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String name = auth.getName(); // get logged in user name
-		model.addAttribute("username",name);
-		return "ZadeshwarList";
-		
-		
-		
-///     REST WEB SERVICES FOR PERTICULAR MEMBER (JSON)
-//		return type for methode
-		
-//		Member memb = m.get(0);
-//		if(memb == null)
-//			return new ResponseEntity(HttpStatus.NOT_FOUND);
-//			return new ResponseEntity<Member>(memb,HttpStatus.OK);
-	}
-	
-	
-	
-	
-	
-	
-	
 
-	
-	
-	
 }

@@ -45,12 +45,12 @@
  				</div>
  			</div> --%>
  			
- 		    <div class="row" id="divResults">
+ 		   <!--  <div class="row" id="divResults"> -->
  		    	<div class="col-8">
  		    		<div class="card">
  		    		
  		    			<div class="card-herder bg-success text-white">
- 		    				<h3>Member's Details</h3>
+ 		    				<h3 style="padding-left:10px;">Member's Details</h3>
  		    			</div>
  		    			
  		    			<div class="card-body">
@@ -66,8 +66,34 @@
  		    		</div>
  		    	</div>
  		    
+ 		    
+ 		    
+ 		    
+		
+			<form>
+			<div class="col-8 form-horizontal form-group row" style="margin-top:10px;margin-left:2px">
+				<div class="form-row">
+					<div class="col-6">
+						<input type="text" class="form-control" placeholder="Volunteer's Name">
+					</div>
+					<div class="col">
+						<input type="text" class="form-control" placeholder="Status (YES/NO)">
+					</div>
+					<div class="col">
+						<input type="text" class="form-control" placeholder="NO. Person/Kids">
+					</div>
+				</div>
+				</div>
+			
+		
+		
+		
+		<div class="form-horizontal form-group row" style="margin-left:20px;">
+ 		    <a href="<c:url value="/getData/Members" />" class="btn btn-warning" style="margin-top:20px;"> Back </a>
+ 		    <a href="#" class="btn btn-success" style="margin-top:20px; margin-left:20px;"> Update </a>
+ 		    <a href="<c:url value="/find/${Member.getEmail()}" />" class="btn btn-primary" style="margin-top:20px; margin-left:20px;"> Save </a>
  		    </div>
- 		    <a href="" class="btn btn-warning" style="margin-top:20px;"> Back </a>
+ 		    </form>
  		    
  		    <!-- <div class="row" id="divError">
  		    	<div class="col-8">

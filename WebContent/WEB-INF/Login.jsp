@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="Header.jsp" />
+<jsp:include page="HeaderInside.jsp" />
 <div class="container" style="padding-top: 10px; ">
 		
 
